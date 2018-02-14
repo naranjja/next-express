@@ -34,6 +34,10 @@ app.prepare()
             'pdfmake'
         ])
 
+        require('./api')(server, [
+            'upload'
+        ])
+
         server.get('*', (req, res) => handle(req, res))
 
         server.listen(3000, (err) => {

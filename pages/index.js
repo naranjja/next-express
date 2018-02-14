@@ -6,6 +6,7 @@ import Break from "./../components/Break"
 import Chart from "./../components/Chart"
 import StockChart from "./../components/StockChart"
 import Button from "./../components/Button"
+import UploadButton from "./../components/UploadButton"
 import Table from "./../components/Table"
 
 export default () => (
@@ -20,9 +21,10 @@ export default () => (
         <Menu />
         <Break />
         <Container>
+            <Segment><Button /></Segment>
+            <Segment><UploadButton /></Segment>
             <Segment><Chart /></Segment>
             <Segment><StockChart /></Segment>
-            <Segment><Button /></Segment>
             <Segment><Table /></Segment>
         </Container>
         <Break />
