@@ -1,7 +1,4 @@
 import fetch from 'isomorphic-unfetch'
-import $ from 'jquery'
-
-$.DataTable = require('datatables.net-se')
 
 const columns = [{
         title: 'Name',
@@ -20,7 +17,7 @@ class Table extends React.Component {
         fetch('http://localhost:3000/public/sample-table-data.json')
             .then(response => response.json())
             .then(data => {
-                $(this.refs.main).DataTable({
+                const table = $(this.refs.main).DataTable({
                     data,
                     columns,
                     ordering: false,
@@ -30,12 +27,15 @@ class Table extends React.Component {
                     bInfo: false,
                     lengthChange: false,
                     pageLength: 10,
-                 })
-            })
+                    buttons: [
+                        'copy', 'excel', 'pdf'
+                    ]
+                })
+                table.buttons().container().appendTo($('div.eight.column:eq(0)', table.table().container()))
+            })                
     }
     componentWillUnmount() {
-       $('.data-table-wrapper')
-           .find('table')
+        $(this.refs.main)
            .DataTable()
            .destroy(true)
     }
@@ -46,6 +46,23 @@ class Table extends React.Component {
         return (
             <div>
                 <link rel="stylesheet" href="/modules/datatables.net-se/css/dataTables.semanticui.css" />
+                <link rel="stylesheet" href="/modules/datatables.net-buttons-se/css/buttons.semanticui.min.css" />
+
+                <script type="text/javascript" src="/modules/jquery/dist/jquery.min.js"></script>
+
+                <script type="text/javascript" src="/modules/datatables.net/js/jquery.dataTables.js"></script>
+
+                <script type="text/javascript" src="/modules/datatables.net-se/js/dataTables.semanticui.js"></script>
+
+                <script type="text/javascript" src="/modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+                <script type="text/javascript" src="/modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+                <script type="text/javascript" src="/modules/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+                <script type="text/javascript" src="/modules/datatables.net-buttons-se/js/buttons.semanticui.min.js"></script>
+
+                <script type="text/javascript" src="/modules/jszip/dist/jszip.min.js"></script>
+                <script type="text/javascript" src="/modules/pdfmake/build/pdfmake.min.js"></script>
+                <script type="text/javascript" src="/modules/pdfmake/build/vfs_fonts.js"></script>
+
                 <table className="ui celled table" ref="main" />
             </div>
         )

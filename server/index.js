@@ -6,16 +6,33 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 const path = require('path')
-const MODULES = path.join(path.resolve(__dirname, '..'), 'node_modules')
-const PUBLIC = path.join(path.resolve(__dirname, '..'), 'public')
+const root = path.resolve(__dirname, '..')
 
 app.prepare()
     .then(() => {
         const server = express()
 
-        server.use('/public/', express.static(PUBLIC))
-        server.use('/modules/semantic-ui-css', express.static(path.join(MODULES, 'semantic-ui-css')))
-        server.use('/modules/datatables.net-se', express.static(path.join(MODULES, 'datatables.net-se')))
+        const exposeModules = modules => {
+            modules.forEach(module => {
+                server.use(
+                    '/modules/' + module, 
+                    express.static(path.join(path.join(root, 'node_modules'), module))
+                )
+            })
+        }
+
+        server.use('/public/', express.static(path.join(root, 'public')))
+
+        exposeModules([
+            'jquery',
+            'semantic-ui-css',
+            'datatables.net',
+            'datatables.net-buttons',
+            'datatables.net-se',
+            'datatables.net-buttons-se',
+            'jszip',
+            'pdfmake'
+        ])
 
         server.get('*', (req, res) => handle(req, res))
 
