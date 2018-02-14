@@ -7,12 +7,15 @@ const handle = app.getRequestHandler()
 
 const path = require('path')
 const MODULES = path.join(path.resolve(__dirname, '..'), 'node_modules')
+const PUBLIC = path.join(path.resolve(__dirname, '..'), 'public')
 
 app.prepare()
     .then(() => {
         const server = express()
 
+        server.use('/public/', express.static(PUBLIC))
         server.use('/modules/semantic-ui-css', express.static(path.join(MODULES, 'semantic-ui-css')))
+        server.use('/modules/datatables.net-se', express.static(path.join(MODULES, 'datatables.net-se')))
 
         server.get('*', (req, res) => handle(req, res))
 

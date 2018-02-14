@@ -4,6 +4,7 @@ import { Container, Segment } from "semantic-ui-react"
 import Button from "./../components/Button"
 import Menu from "./../components/Menu"
 import Break from "./../components/Break"
+import Table from "./../components/Table"
 
 export default () => (
   <div>
@@ -19,6 +20,9 @@ export default () => (
         <Container>
             <Segment>
                 <Button />
+            </Segment>
+            <Segment>
+                <Table />
             </Segment>
         </Container>
   </div>
