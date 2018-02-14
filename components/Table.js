@@ -17,7 +17,7 @@ class Table extends React.Component {
         fetch('http://localhost:3000/public/sample-table-data.json')
             .then(response => response.json())
             .then(data => {
-                const table = $(this.refs.main).DataTable({
+                const table = $(this.refs.table).DataTable({
                     data,
                     columns,
                     ordering: false,
@@ -35,7 +35,7 @@ class Table extends React.Component {
             })                
     }
     componentWillUnmount() {
-        $(this.refs.main)
+        $(this.refs.table)
            .DataTable()
            .destroy(true)
     }
@@ -63,7 +63,7 @@ class Table extends React.Component {
                 <script type="text/javascript" src="/modules/pdfmake/build/pdfmake.min.js"></script>
                 <script type="text/javascript" src="/modules/pdfmake/build/vfs_fonts.js"></script>
 
-                <table className="ui celled table" ref="main" />
+                <table className="ui celled table" ref="table" />
             </div>
         )
     }

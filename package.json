@@ -33,6 +33,7 @@
     "pdfmake": "^0.1.35",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-highcharts": "^16.0.2",
     "semantic-ui-css": "^2.2.14",
     "semantic-ui-react": "^0.78.2"
   },

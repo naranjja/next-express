@@ -1,9 +1,11 @@
 import Link from "next/link"
 import Head from "next/head"
 import { Container, Segment } from "semantic-ui-react"
-import Button from "./../components/Button"
 import Menu from "./../components/Menu"
 import Break from "./../components/Break"
+import Chart from "./../components/Chart"
+import StockChart from "./../components/StockChart"
+import Button from "./../components/Button"
 import Table from "./../components/Table"
 
 export default () => (
@@ -18,12 +20,11 @@ export default () => (
         <Menu />
         <Break />
         <Container>
-            <Segment>
-                <Button />
-            </Segment>
-            <Segment>
-                <Table />
-            </Segment>
+            <Segment><Chart /></Segment>
+            <Segment><StockChart /></Segment>
+            <Segment><Button /></Segment>
+            <Segment><Table /></Segment>
         </Container>
+        <Break />
   </div>
 )
