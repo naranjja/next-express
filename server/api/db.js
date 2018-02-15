@@ -1,13 +1,10 @@
 const mongo = require('mongodb')
 const router = require('express').Router()
 const { db } = require('./../../settings')
+const { parseRegExpInQuery } = require('./../utils')
 
 const find = (collection, query, show) => {
-    for (key in query) {
-        if (~query[key].indexOf('/')) {
-            query[key] = new RegExp(query[key].replace(/\//g, ''))
-        }
-    }
+    query = parseRegExpInQuery(query)
     return new Promise((resolve, reject) => {
         mongo.connect(db.uri + db.name)
             .then(client => {
