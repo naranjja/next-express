@@ -3,6 +3,11 @@ const router = require('express').Router()
 const { db } = require('./../../settings')
 
 const find = (collection, query, show) => {
+    for (key in query) {
+        if (~query[key].indexOf('/')) {
+            query[key] = new RegExp(query[key].replace(/\//g, ''))
+        }
+    }
     return new Promise((resolve, reject) => {
         mongo.connect(db.uri + db.name)
             .then(client => {
@@ -53,10 +58,10 @@ router.post('/select', (req, res) => {
         {
             "collection": "<collection_name>",
             "query": {
-                "<key>": "<filter>",
-                "<key>": "<filter>",
+                "<key>": "<filter|string|regex>",
+                "<key>": "<filter|string|regex>>",
                 ...
-                "<key>": "<filter>"                
+                "<key>": "<filter|string|regex>>"                
             },
             "show": {
                 "<key>": 1,
@@ -65,6 +70,7 @@ router.post('/select', (req, res) => {
                 "<key>": 1                
             }
         }
+    NOTE: regex must be a string and not include modifiers.
     */
 
     const { collection, query, show } = req.body
@@ -90,12 +96,13 @@ router.post('/count', (req, res) => {
         {
             "collection": "<collection_name>",
             "query": {
-                "<key>": "<filter>",
-                "<key>": "<filter>",
+                "<key>": "<filter|string|regex>>",
+                "<key>": "<filter|string|regex>>",
                 ...
-                "<key>": "<filter>"                
+                "<key>": "<filter|string|regex>>"                
             }
         }
+    NOTE: regex must be a string and not include modifiers.
     */
 
     const { collection, query } = req.body
