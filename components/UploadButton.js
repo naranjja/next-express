@@ -2,7 +2,7 @@ import { Button } from "semantic-ui-react"
 
 class UploadButton extends React.Component {
     render () {
-        let textInput = null
+        let fileInput = null
         const uploadFile = (file) => {
             const formData = new FormData()
             formData.append("file", file)
@@ -11,7 +11,7 @@ class UploadButton extends React.Component {
                     body: formData
                 })
                 .then(() => {
-                    textInput.value = ""  // reset input
+                    fileInput.value = ""  // reset input
                     console.log("Uploaded file.")
                 })
                 .catch(err => console.log(err))
@@ -20,10 +20,10 @@ class UploadButton extends React.Component {
             <div>
                 <input 
                     type="file"
-                    ref={(input) => { textInput = input }}
-                    onChange={() => uploadFile(textInput.files[0])}
+                    ref={(input) => { fileInput = input }}
+                    onChange={() => uploadFile(fileInput.files[0])}
                     style={{ display: "none" }} />
-                <Button fluid as="a" size="large" onClick={() => textInput.click()}>Upload</Button>
+                <Button fluid as="a" size="large" onClick={() => fileInput.click()}>Upload</Button>
             </div>
         )
     }

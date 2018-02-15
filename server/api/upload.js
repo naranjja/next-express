@@ -3,6 +3,15 @@ const formidable = require('formidable')
 const path = require('path')
 
 router.post('/', (req, res) => {
+
+    /*
+    POST '/api/upload'
+    Header:
+        Content-Type: multipart/form-data
+    Body:
+        FormData()
+    */
+
     const form = new formidable.IncomingForm()
     form.uploadDir = path.join(path.resolve(path.resolve(__dirname, '..'), '..'), 'uploads')
     form.parse(req, (err, fields, files) => {

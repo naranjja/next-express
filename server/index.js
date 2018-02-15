@@ -11,6 +11,10 @@ const root = path.resolve(__dirname, '..')
 app.prepare()
     .then(() => {
         const server = express()
+        const bodyParser = require('body-parser')
+        
+        server.use(bodyParser.json())
+        server.use(bodyParser.urlencoded({ extended: false }))
 
         const exposeModules = modules => {
             modules.forEach(module => {
@@ -31,11 +35,12 @@ app.prepare()
             'datatables.net-se',
             'datatables.net-buttons-se',
             'jszip',
-            'pdfmake'
+            'pdfmake',
         ])
 
         require('./api')(server, [
-            'upload'
+            'upload',
+            'db',
         ])
 
         server.get('*', (req, res) => handle(req, res))

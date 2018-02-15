@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Head from "next/head"
 import { Container, Segment } from "semantic-ui-react"
+
 import Menu from "./../components/Menu"
 import Break from "./../components/Break"
 import Chart from "./../components/Chart"
