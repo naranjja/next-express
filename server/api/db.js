@@ -12,7 +12,8 @@ const find = (collection, query, show) => {
                     client
                     .db(db.name)
                     .collection(collection)
-                    .find(query, show)
+                    .find(query)
+                    .project(show)
                 )
             })
             .catch(err => reject(err))
